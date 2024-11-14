@@ -106,10 +106,12 @@
 
 .portfolio-section {
     background: var(--tj-black-2);
+    padding: 120px 0;
 
     @media screen {
         @media (max-width: 767px) {
-            padding-bottom: 60px;
+            // padding-bottom: 60px;
+            padding: 60px 0;
         }
     }
 
@@ -455,6 +457,50 @@
         .tj-header-area .header-button .btn {
             font-size: 12px;
             padding: 10px 20px;
+        }
+
+        .form_btn {
+            text-align: right;
+
+            button {
+                width: 100%;
+            }
+        }
+    }
+}
+
+.form_group {
+    position: relative;
+
+    .invalid-text {
+        color: red;
+        position: absolute;
+        top: 100%;
+        margin-top: 1px;
+        font-size: 12px;
+        line-height: 1;
+    }
+
+    input.active,
+    textarea.active,
+    select.active+.tj-nice-select {
+        border: 1px solid var(--tj-theme-primary) !important;
+    }
+
+}
+
+.request-success-wrapper {
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: .02em;
+
+    @media screen {
+        @media (max-width: 1199px) {
+            font-size: 20px;
+        }
+
+        @media (max-width: 1199px) {
+            font-size: 18px;
         }
     }
 }

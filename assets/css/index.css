@@ -102,10 +102,11 @@
 
 .portfolio-section {
   background: var(--tj-black-2);
+  padding: 120px 0;
 }
 @media screen and (max-width: 767px) {
   .portfolio-section {
-    padding-bottom: 60px;
+    padding: 60px 0;
   }
 }
 .portfolio-section .portfolio-btn-wrapper {
@@ -457,5 +458,43 @@
   .tj-header-area .header-button .btn {
     font-size: 12px;
     padding: 10px 20px;
+  }
+  .form_btn {
+    text-align: right;
+  }
+  .form_btn button {
+    width: 100%;
+  }
+}
+.form_group {
+  position: relative;
+}
+.form_group .invalid-text {
+  color: red;
+  position: absolute;
+  top: 100%;
+  margin-top: 1px;
+  font-size: 12px;
+  line-height: 1;
+}
+.form_group input.active,
+.form_group textarea.active,
+.form_group select.active + .tj-nice-select {
+  border: 1px solid var(--tj-theme-primary) !important;
+}
+
+.request-success-wrapper {
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+@media screen and (max-width: 1199px) {
+  .request-success-wrapper {
+    font-size: 20px;
+  }
+}
+@media screen and (max-width: 1199px) {
+  .request-success-wrapper {
+    font-size: 18px;
   }
 }/*# sourceMappingURL=index.css.map */
