@@ -353,7 +353,149 @@ Description: Gerold - Personal Portfolio HTML5 Template
 			removalDelay: 300,
 			mainClass: "popup-mfp",
 		});
-	});
+
+
+		let ValidateEmail = function (email) {
+			// console.log(email.value)
+			var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+			if (reg.test(email.val()) == false) {
+				return false
+			}
+			else return true
+		}
+		// Инициадизация отправки формы
+		const Forms = {
+			defaultsOptions: {
+				FormsElems: $('.form-default.--index')
+			},
+
+			submit: function (options) {
+				var options = $.extend(this.defaultsOptions, options)
+				// console.log(options)
+				options.FormsElems.on('submit', function (e) {
+					e.preventDefault()
+					let EditInputWrapper = function (input, invalidText) {
+						if (!input.closest('.form_group.invalid').length) {
+							var ItemInputWrapper = input.closest('.form_group')
+							ItemInputWrapper.addClass('invalid')
+							if (invalidText) {
+								var InvalidText = "<span class='invalid-text'>" + invalidText + "</span>"
+								$(InvalidText).appendTo(ItemInputWrapper)
+							}
+						}
+					}
+
+					// console.log('submit')
+					let $this = $(this),
+						InvalidCount = 0,
+						AllRequiredInputs = $this.find('input[type="text"]')
+					// console.log(AllRequiredInputs)
+
+					$.each(AllRequiredInputs, function (i, input) {
+						// console.log(input)
+						if ($(input).val() == '') {
+							EditInputWrapper($(input), 'Заполните поле')
+							InvalidCount += 1
+						}
+						else {
+							if ($(input).hasClass('input-phone') && !$(input).inputmask("isComplete")) {
+								EditInputWrapper($(input), 'Введите корректный номер')
+								InvalidCount += 1
+							}
+							if ($(input).hasClass('input-mail') && !ValidateEmail($(input))) {
+								EditInputWrapper($(input), 'Введите корректный email')
+								InvalidCount += 1
+							}
+						}
+					})
+
+					if (InvalidCount == 0) {
+						const formData = new FormData(),
+							textarea = $this.find('textarea')
+						if (textarea.val() != '')
+							AllRequiredInputs = AllRequiredInputs.add(textarea)
+						$.each(AllRequiredInputs, function () {
+							let $thisVal = this.value
+							if (this.getAttribute('name') == 'input-phone') {
+								$thisVal = $thisVal.replace(/\s+/g, '')
+							}
+							formData.append(this.getAttribute('name'), $thisVal)
+						})
+						// formData.append('form-type', $this.attr('data-type'))
+						for (let [name, value] of formData) {
+							console.log(`${name} = ${value}`)
+							// alert(`${name} = ${value}`); // key1=value1, потом key2=value2
+						}
+
+						// Ajax-запрос тут можно написать
+						const SuccessWrapper = "<div class='request-success-wrapper'></div>"
+						$(SuccessWrapper).insertAfter($this)
+						const RequestSuccess = $this.siblings('.request-success-wrapper'),
+							$thisFormHeight = $this.innerHeight()
+
+						let formSend = true  // Переменная для хранения информации успешности отправки формы.
+
+						formSend = true
+							? RequestSuccess.html('Ваша форма успешно отправлена!<br>В ближайщее время мы свяжемся с вами.')
+							: RequestSuccess.html('При отправке формы возникла ошибка! Попробуйте снова после перезагрузки страницы')
+						if (formSend == 'robot')
+							RequestSuccess.html('Вы не прошли проверку на робота! Попробуйте снова после перезагрузки страницы')
+						// console.log(RequestSuccess)
+						RequestSuccess.fadeIn({
+							start: function () {
+								if (docWidth < 1200)
+									window.scrollTo(0, ($this.closest('.contact-form-box ').offset().top - $('.header-sticky').innerHeight()))
+								$this.hide().remove()
+								if (docWidth >= 1200) {
+									$(this).css({
+										'height': $thisFormHeight + 'px',
+									})
+								}
+								else {
+									$(this).css({
+										'height': '',
+									})
+								}
+							},
+						})
+					}
+					// e.preventDefault()
+				})
+				this.events(options.FormsElems)
+			},
+			events: function (forms) {
+				// Функционал изменения input
+				forms.on('input change', 'input[type="text"], .form_group textarea', function (e) {
+					var $this = $(this),
+						$thisInputWrapper = $this.closest('.form_group')
+					$thisInputWrapper.find('.invalid-text').remove()
+					$thisInputWrapper.removeClass('invalid')
+
+					$this.val() != ''
+						? $this.addClass('active')
+						: $this.removeClass('active')
+				})
+				forms.on('change', '.form_group select', function (e) {
+					const $this = $(this)
+					$this.prop('selectedIndex') != 0
+						? $this.addClass('active')
+						: $this.removeClass('active')
+				})
+			}
+		}
+
+		if ($('.form-default.--index').length) {
+			Forms.submit()
+		}
+		//------------------------------------
+
+	}); // end ready
+
+	let docWidth = document.body.clientWidth
+
+	$(window).on('resize', function () {
+		docWidth = document.body.clientWidth
+	})
 
 	$(window).on("load", function () {
 		/*------------------------------------------------------
