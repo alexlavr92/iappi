@@ -128,6 +128,11 @@ Description: Gerold - Personal Portfolio HTML5 Template
 			changeHash: false,
 			easing: "swing",
 		});
+		$(".header-button .tj-btn-primary").onePageNav({
+			// currentClass: "current-menu-ancestor",
+			changeHash: false,
+			easing: "swing",
+		});
 
 		/*------------------------------------------------------
 		/  Portfolio Filter
