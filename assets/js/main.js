@@ -489,6 +489,31 @@ Description: Gerold - Personal Portfolio HTML5 Template
 		}
 		//------------------------------------
 
+
+		function EditRadiButtonAnother(texarea_elem) {
+			const ThisInputWrapper = texarea_elem.closest('.form-input_wrapper'),
+				AnotherInputWrapper = ThisInputWrapper.prev('.form-input_wrapper')
+			if (texarea_elem.val() != '')
+				AnotherInputWrapper.find('input').prop('checked', true)
+			// : AnotherInputWrapper.find('input').prop('checked', false)
+
+		}
+
+		$('body').on('change input', '.form-question-inner textarea', function () {
+			const $this = $(this)
+			EditRadiButtonAnother($this)
+		})
+
+		$('body').on('click', '.form-default.--survey .form-clear', function (e) {
+			e.preventDefault()
+			const $this = $(this),
+				form = $this.closest('.form-default.--survey')
+			form.find('input').prop('checked', false)
+			form.find('textarea').val('')
+			form.find('select').val('')
+			form.find('select').niceSelect('update');
+			// $('.nice-select')
+		})
 	}); // end ready
 
 	let docWidth = document.body.clientWidth
