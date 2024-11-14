@@ -263,6 +263,17 @@ Description: Gerold - Personal Portfolio HTML5 Template
 						nextEl: NextArrow,
 						prevEl: PrevArrow,
 					},
+					breakpoints: {
+						1199: {
+							slidesPerView: 2,
+							slidesPerGroup: 2,
+						},
+						767: {
+							slidesPerView: 1,
+							slidesPerGroup: 1,
+							spaceBetween: 15,
+						},
+					},
 					/* autoplay: {
 						delay: 5000,
 						disableOnInteraction: false,
