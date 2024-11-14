@@ -466,6 +466,13 @@
                 width: 100%;
             }
         }
+
+        .services-widget .service-item .left-box {
+            @include flex-block;
+            @include flex-column;
+            align-items: flex-start !important;
+            justify-content: flex-start !important;
+        }
     }
 }
 

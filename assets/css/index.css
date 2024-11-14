@@ -465,6 +465,25 @@
   .form_btn button {
     width: 100%;
   }
+  .services-widget .service-item .left-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    align-items: flex-start !important;
+    justify-content: flex-start !important;
+  }
 }
 .form_group {
   position: relative;
