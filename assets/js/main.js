@@ -514,6 +514,50 @@ Description: Gerold - Personal Portfolio HTML5 Template
 			form.find('select').niceSelect('update');
 			// $('.nice-select')
 		})
+
+
+		let openProjects,
+			scrollTopProjects
+		if ($('.portfolio-item').length) {
+			if ($('.portfolio-item').length > 4) {
+				$('.portfolio-item:nth-child(4)').nextAll().hide().addClass('hide')
+				openProjects = false
+				const btnMoreWrapper =
+					'<div class="portfolio-btn-wrapper flex-block">' +
+					'<a href="#" class="btn portfolio-btn tj-btn-primary">Показать все проекты</a>' +
+					'</div>'
+				$(btnMoreWrapper).insertAfter('.portfolio-box')
+			}
+		}
+
+		$('body').on('click', '.portfolio-btn', function (e) {
+			e.preventDefault()
+			const $this = $(this),
+				PortfolioBox = $this.closest('.portfolio-btn-wrapper').siblings('.portfolio-box'),
+				PortfolioItems = PortfolioBox.find('.portfolio-item.hide')
+
+			if (openProjects == false) {
+				scrollTopProjects = $(window).scrollTop()
+				PortfolioItems.slideDown({
+					// duration: 1000,
+				})
+				openProjects = true
+				$this.text('Скрыть все проекты')
+				// console.log(scrollTopProjects)
+			}
+			else {
+				/* if (document.documentElement.clientWidth >= 1200) { */
+				$('body,html').animate({ scrollTop: scrollTopProjects, }, 0);
+				PortfolioItems.slideUp({
+					duration: 750,
+				})
+				openProjects = false
+				$this.text('Показать все проекты')
+			}
+
+
+			// window.scrollTo(0, scrollTop)
+		})
 	}); // end ready
 
 	let docWidth = document.body.clientWidth
