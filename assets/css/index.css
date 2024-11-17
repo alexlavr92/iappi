@@ -118,6 +118,9 @@
           align-items: center;
   margin-top: 50px;
 }
+.portfolio-section .portfolio-btn-wrapper .portfolio-btn {
+  text-transform: none;
+}
 @media screen and (max-width: 767px) {
   .portfolio-section .portfolio-btn-wrapper {
     margin-top: 30px;
@@ -134,6 +137,13 @@
 }
 .portfolio-section .portfolio-box .image-box {
   width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.portfolio-section .portfolio-box .image-box img {
+  display: block;
+  width: 100%;
+  max-width: none;
 }
 .portfolio-section .portfolio-item {
   margin-bottom: 0;
